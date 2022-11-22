@@ -1,1 +1,1 @@
-# infotec
+# INFOTEC
