@@ -18,22 +18,26 @@
         <div class="container">
 
             <h2>Problema 1</h2>
+            <p> 1) Ordenar un vector de enteros mediante el método sort, pasar una arrow function.</p>
             <div>
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label" for="lista-01">Lista de números:</label>
-                        <input class="form-control" id="lista-01" placeholder="Ingrese numeros separados por un espacio" type="text">
-                        <div id="result1"></div>
+                        <input class="form-control" id="lista-01" placeholder="Ingrese numeros separados por un espacio"
+                            type="text">
+
                     </div>
-                    <div id="result1" class="form-group">
-                        
-                        
+                    <div class="form-group">
+                        <label class="control-label" for="salida-01">Lista ordenada:</label>
+                        <input class="form-control" id="result1" disabled="true" id="salida-01" placeholder="Resultado"
+                            type="text">
+
                     </div>
                     <button type="button" onclick="orderData()" class="btn btn-danger">Ordenar</button>
                     <button type="reset" class="btn btn-default">Limpiar</button>
                 </form>
-                
-                
+
+
             </div>
             <hr>
             <h2>Problema 2</h2>
@@ -53,30 +57,46 @@
     <script src="../js/script.js"></script>
 
     <script>
-        function orderData(){
-            var lista=[];
-            let arr = document.getElementById("lista-01").value.split(" ");
-            arr.forEach(element => {
-                z = parseInt(element);
-                console.log(z)
-                if(z+'' != 'NaN') lista.push(z); 
-            });
-            
-            const orderList = orderByShort(lista);
-            var s = '';
-            lista.forEach(i => {s+=i+", "})
-            
-            document.getElementById('result1').innerHTML=`<label class="control-label" for="salida-01">Lista ordenada:</label>
-                        <input class="form-control" id="salida-01" placeholder="Ingrese numeros separados por un espacio" type="text" value="${s.substring(0, s.length-2)}">`;
+        /**
+         * Obtiene el texto del input text y los convierte en un array de enteros
+         * Usa el metodo orderByShort para ordenarlos y mostrar el resultado 
+         */
+        function orderData() {
+            var input = document.getElementById("lista-01").value;
+
+            if (/[0-9]+ [0-9]+/.test(input)) {
+                var lista = [];
+                let arr = input.split(" ");
+
+                arr.forEach(element => {
+                    let z = parseInt(element);
+                    console.log(z)
+                    if (z + '' != 'NaN') lista.push(z);
+                });
+
+                const orderList = orderByShort(lista);
+
+                var s = '';
+                lista.forEach(i => { s += i + ", " })
+
+                document.getElementById('result1').value = s.substring(0, s.length - 2);
+                
+            } else{
+                alert("Error, Deben ser numeros separados por un espacio.")
+            }
+
         }
-        function orderByShort(lista){
-            return lista.sort((x,y)=>{
-                if(x > y) return 1;
+        /**
+         * Metodo de ordenamiento que recibe una lista por parametros. 
+         */
+        function orderByShort(lista) {
+            return lista.sort((x, y) => {
+                if (x > y) return 1;
                 else return -1;
             })
         }
 
-        
+
     </script>
 </body>
 
