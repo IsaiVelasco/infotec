@@ -162,7 +162,11 @@
 
                 const primos = lista.filter(numero => isPrimeNumber(numero));
 
-                document.getElementById('salida-02').value = primos.toString();
+                if(primos.length > 0)
+                    document.getElementById('salida-02').value = primos.toString();
+                else
+                    document.getElementById('salida-02').value = "No hay números primos en la lista";
+
 
             } else {
                 alert("Error, Deben ser numeros separados por un espacio.")
