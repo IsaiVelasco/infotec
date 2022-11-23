@@ -42,25 +42,43 @@
             <hr>
             <h2>Problema 2</h2>
             <p>
-                2) Definir un vector con un conjunto de elementos. Generar un nuevo vector llamando al método filter 
-                pasando una función de flecha para definir cuáles rescatar. 
+                2) Definir un vector con un conjunto de elementos. Generar un nuevo vector llamando al método filter
+                pasando una función de flecha para definir cuáles rescatar.
             </p>
             <div>
-                
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label" for="entrada-02">Arreglo de números:</label>
+                        <input class="form-control" id="entrada-02"
+                            placeholder="Ingrese numeros separados por un espacio" type="text">
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="salida-02">Primos:</label>
+                        <input class="form-control" id="salida-02" disabled="true" id="salida-01"
+                            placeholder="Numeros primos del arreglo" type="text">
+
+                    </div>
+                    <button type="button" onclick="printPrimos()" class="btn btn-danger">Filtrar</button>
+                    <button type="reset" class="btn btn-default">Limpiar</button>
+                </form>
+            </div>
+            <div>
+
             </div>
             <hr>
             <h2>Problema 3</h2>
             <p>
-                3)Definir una función de flecha que reciba un valor entero y retorne otro valor entero aleatorio 
-                comprendido entre 1 y el valor que llega como parámetro. Asignar dicha función de flecha a una 
+                3)Definir una función de flecha que reciba un valor entero y retorne otro valor entero aleatorio
+                comprendido entre 1 y el valor que llega como parámetro. Asignar dicha función de flecha a una
                 constante para permitir llamarla en sucesivas ocasiones.
             </p>
             <div>
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label" for="entrada-03">Limite:</label>
-                        <input class="form-control" id="entrada-03" placeholder="Ingrese el fin del rango para generar un numero aleatorio"
-                            type="number">
+                        <input class="form-control" id="entrada-03"
+                            placeholder="Ingrese el fin del rango para generar un numero aleatorio" type="number">
 
                     </div>
                     <div class="form-group">
@@ -112,35 +130,70 @@
 
                 document.getElementById('result1').value = s.substring(0, s.length - 2);
 
-            } else{
+            } else {
                 alert("Error, Deben ser numeros separados por un espacio.")
             }
 
         }
-        
+
         function orderByShort(lista) {
             return lista.sort((x, y) => {
                 if (x > y) return 1;
                 else return -1;
             })
         }
-         /**
-          * PROBLEMA 2
-         */
 
-         /**
-          * PROBLEMA 3
-         */
-         const aleatorio = valor => Math.trunc(Math.random()*valor)+1;
-         function printAleatorio(){
+        /**
+         * PROBLEMA 2
+        */
+        function printPrimos() {
+            var input = document.getElementById("entrada-02").value;
+            if (/[0-9]+ [0-9]+/.test(input)) {
+                var lista = [];
+                let arr = input.split(" ");
+
+                arr.forEach(element => {
+                    let z = parseInt(element);
+                    console.log(z)
+                    if (z + '' != 'NaN') lista.push(z);
+                });
+
+                const primos = lista.filter(numero => isPrimeNumber(numero));
+
+                document.getElementById('salida-02').value = primos.toString();
+
+            } else {
+                alert("Error, Deben ser numeros separados por un espacio.")
+            }
+        }
+
+        const isPrimeNumber = (number) => {
+
+            if (number <= 1) {
+                return false;
+            }
+            let counter = 0;
+            for (let i = Math.trunc(Math.sqrt(number)); i > 1; i--) {
+                if(number % i == 0){
+                    counter ++;
+                }
+            }
+            return counter < 1;
+        }
+        /**
+         * PROBLEMA 3
+         * Obtiene el valor del input type number y genera un valor aleatorio con una funcion flecha.
+        */
+        const aleatorio = valor => Math.trunc(Math.random() * valor) + 1;
+        function printAleatorio() {
             var input = document.getElementById("entrada-03").value;
             var valor = parseInt(input);
-            if(valor!='NaN'){
+            if (valor != 'NaN') {
                 document.getElementById('salida-03').value = aleatorio(valor);
-            } else{
+            } else {
                 alert("Entrada incorrecta")
             }
-         }
+        }
 
     </script>
 </body>
