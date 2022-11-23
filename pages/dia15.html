@@ -18,13 +18,30 @@
         <div class="container">
 
             <h2>Problema 1</h2>
+            <div>
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label" for="lista-01">Lista de números:</label>
+                        <input class="form-control" id="lista-01" placeholder="Ingrese numeros separados por un espacio" type="text">
+                        <div id="result1"></div>
+                    </div>
+                    <div id="result1" class="form-group">
+                        
+                        
+                    </div>
+                    <button type="button" onclick="orderData()" class="btn btn-danger">Ordenar</button>
+                    <button type="reset" class="btn btn-default">Limpiar</button>
+                </form>
+                
+                
+            </div>
             <hr>
             <h2>Problema 2</h2>
             <hr>
             <h2>Problema 3</h2>
             <hr>
             <!-- Botón primario -->
-            <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
+            <a href="../index.html" class="btn btn-default">Ir al inicio</a>
 
         </div>
         <br>
@@ -34,6 +51,33 @@
 
     <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     <script src="../js/script.js"></script>
+
+    <script>
+        function orderData(){
+            var lista=[];
+            let arr = document.getElementById("lista-01").value.split(" ");
+            arr.forEach(element => {
+                z = parseInt(element);
+                console.log(z)
+                if(z+'' != 'NaN') lista.push(z); 
+            });
+            
+            const orderList = orderByShort(lista);
+            var s = '';
+            lista.forEach(i => {s+=i+", "})
+            
+            document.getElementById('result1').innerHTML=`<label class="control-label" for="salida-01">Lista ordenada:</label>
+                        <input class="form-control" id="salida-01" placeholder="Ingrese numeros separados por un espacio" type="text" value="${s.substring(0, s.length-2)}">`;
+        }
+        function orderByShort(lista){
+            return lista.sort((x,y)=>{
+                if(x > y) return 1;
+                else return -1;
+            })
+        }
+
+        
+    </script>
 </body>
 
 </html>
