@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia 15</title>
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div id="idnav"></div>
+    <br>
+    <main class="page">
+        <div class="container">
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia16.html" target="_blank"
+                class="btn btn-link izq">
+                <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
+            <h2>Problema 1</h2>
+            <p>
+                Desarrollaremos una clase que represente un cliente de un banco. La clase Cliente tiene como atributos:
+                nombre, saldo y las responsabilidades o métodos de la clase son: Constructor (inicializamos los
+                atributos
+                del objeto) depositar, extraer.
+            </p>
+            <hr>
+
+            <h2>Problema 2</h2>
+            <p>
+
+            </p>
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-01">Elige tu boleto</a></li>
+                <li><a data-toggle="tab" href="#tab-04">Ir al sorteo</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab-01">
+                    
+                </div>
+                <div class="tab-pane" id="tab-04">...</div>
+            </div>
+        </div>
+    </main>
+    <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+        /**
+         * EJERCICIO 1
+        */
+        function Cliente(nombre, saldo) {
+            this.nombre = nombre;
+            this.saldo = saldo;
+            this.depositar = depositar;
+            this.extraer = extraer;
+        }
+        function depositar(dinero) {
+            this.saldo = saldo + dinero;
+        }
+
+        function extraer(dinero) {
+            this.saldo = saldo - dinero;
+        }
+
+        let cliente1 = new Cliente("Diego", 1200);
+    </script>
+</body>
+
+</html>
