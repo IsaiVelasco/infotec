@@ -124,7 +124,8 @@
                                 <h3>El numero ganador es...</h3>
                             </div>
                             <br>
-                            <button class="btn btn-primary btn-lg" onclick="start()" type="button">INICIAR SORTEO</button>
+                            <button class="btn btn-primary btn-lg" onclick="start()" type="button">INICIAR
+                                SORTEO</button>
                         </div>
                         <div class="col-md-4"></div>
                     </div>
@@ -214,18 +215,27 @@
         function agregarParticipante() {
             let nombre = document.getElementById('entrada-03').value;
             let numero = document.getElementById('entrada-04').value;
+            existe = listaParticipantes.filter(participante => participante.numeroBoleto == numero);
 
-            participante = new Participante(nombre, numero);
-            listaParticipantes.push(participante);
+            if (existe.length === 0) {
+                participante = new Participante(nombre, numero);
+                listaParticipantes.push(participante);
+                actualizarTabla(participante);
+                desabilitarBoleto(numero);
+            } else {
+                alert("Este número YA está ocupado");
+            }
+
+            document.getElementById('btn-cls2').click();
+        }
+
+        function actualizarTabla(participante){
             tabla = document.getElementById('tb-part');
-            tabla.insertRow(-1).innerHTML = `<tr>
+                tabla.insertRow(-1).innerHTML = `<tr>
                                 <td>${participante.nombre}</td>
                                 <td>${participante.numeroBoleto}</td>
                              </tr>`;
-            document.getElementById('btn-cls2').click();
-            desabilitarBoleto(numero);
         }
-
         function desabilitarBoleto(numero) {
             selector = document.getElementById('entrada-04');
             options = selector.childNodes;
@@ -237,25 +247,25 @@
             });
         }
 
-        
+
 
         function start() {
             let bolillero = new Bolillero();
-            bolillero.sortear;
+            bolillero.sortear();
             let numGanador = bolillero.numero;
             obtenerGanador = listaParticipantes.filter(participante => participante.numeroBoleto == numGanador)
 
             let sms = document.getElementById("ganador");
-            sms.innerHTML = `<h1>${numGanador}</h1>`;   
+            sms.innerHTML = `<h1 style="text-align: center;">${numGanador}</h1>`;
             if (obtenerGanador.length === 0) {
-                sms.innerHTML += `<h3>Nadie se lo lleva</h3>`;
-            } else{
-                sms.innerHTML += `<h3>${obtenerGanador[0]}</h3>`;
+                sms.innerHTML += `<h3 style="text-align: center;>Nadie se lo lleva</h3>`;
+            } else {
+                sms.innerHTML += `<h3>${obtenerGanador[0].nombre}</h3>`;
             }
-            
+
         }
 
-        
+
     </script>
 </body>
 
