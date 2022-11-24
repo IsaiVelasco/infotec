@@ -66,11 +66,14 @@
 
             <h2>Problema 2</h2>
             <p>
-                Desarrollaremos un programa que contenga dos clases. Una clase NumeroQuiniela que representa una persona que elige 
-                un número de quiniela y además registra su nombre, la clase tiene por objetivo la carga por el teclado del número deseado. 
-                La segunda clase Bolillero que sortee un valor aleatorio entre 1 y 10 (que representa el valor extraído del bolillero).
+                Desarrollaremos un programa que contenga dos clases. Una clase NumeroQuiniela que representa una persona
+                que elige
+                un número de quiniela y además registra su nombre, la clase tiene por objetivo la carga por el teclado
+                del número deseado.
+                La segunda clase Bolillero que sortee un valor aleatorio entre 1 y 10 (que representa el valor extraído
+                del bolillero).
             </p>
-            <table class="table table-bordered table-responsive"  id="tb-part">
+            <table class="table table-bordered table-responsive" id="tb-part">
                 <caption>Participantes</caption>
                 <thead>
                     <tr>
@@ -90,7 +93,8 @@
                     <form role="form">
                         <div class="form-group">
                             <label class="control-label" for="entrada-03">Participante:</label>
-                            <input class="form-control" id="entrada-03" placeholder="Ingrese su nombre para participar" type="text">
+                            <input class="form-control" id="entrada-03" placeholder="Ingrese su nombre para participar"
+                                type="text">
                         </div>
                         <div class="form-group">
                             <label for="entrada-04">Número de boleto:</label>
@@ -107,12 +111,23 @@
                                 <option value="10">10</option>
                             </select>
                         </div>
-                        <button type="button" onclick="agregarParticipante()" class="btn btn-danger">Registrarse</button>
+                        <button type="button" onclick="agregarParticipante()"
+                            class="btn btn-danger">Registrarse</button>
                         <button type="reset" class="btn btn-default" id="btn-cls2">Limpiar</button>
                     </form>
                 </div>
                 <div class="tab-pane" id="tab-04">
-                    
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div id="ganador">
+                                <h3>El numero ganador es...</h3>
+                            </div>
+                            <br>
+                            <button class="btn btn-primary btn-lg" onclick="start()" type="button">INICIAR SORTEO</button>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
                 </div>
             </div>
             <hr>
@@ -140,7 +155,7 @@
         }
 
         function extraer(dinero) {
-            if(this.saldo >= dinero){
+            if (this.saldo >= dinero) {
                 this.saldo -= dinero;
                 return true;
             }
@@ -159,7 +174,7 @@
                     cliente1.depositar(dinero);
                     break;
                 case 'Retirar':
-                    if(!cliente1.extraer(dinero)){
+                    if (!cliente1.extraer(dinero)) {
                         alert('Fondos insuficientes')
                     }
                     break;
@@ -167,8 +182,8 @@
             updateCliente();
             document.getElementById('btn-cls').click();
         }
-        
-        
+
+
         function updateCliente() {
             document.getElementById('row_name_1').childNodes[3].innerHTML = cliente1.nombre;
             document.getElementById('row_name_1').childNodes[5].innerHTML = cliente1.apellidos;
@@ -178,21 +193,30 @@
         /*****************************************************************************
          * EJERCICIO 1
         */
-        
-        function Participante(nombre, numeroBoleto){
+        var listaParticipantes = [];
+        function Participante(nombre, numeroBoleto) {
             this.nombre = nombre;
             this.numeroBoleto = numeroBoleto;
-            this.gano = function(num){
-                if(this.numeroBoleto == num) 
+            this.gano = function (num) {
+                if (this.numeroBoleto == num)
                     return true;
                 return false;
             }
         }
-        function agregarParticipante(){
+
+        function Bolillero() {
+            this.numero = -1;
+            this.sortear = function () {
+                this.numero = parseInt(Math.random() * 10) + 1;
+            }
+        }
+
+        function agregarParticipante() {
             let nombre = document.getElementById('entrada-03').value;
             let numero = document.getElementById('entrada-04').value;
 
-            participante = new Participante(nombre,numero);
+            participante = new Participante(nombre, numero);
+            listaParticipantes.push(participante);
             tabla = document.getElementById('tb-part');
             tabla.insertRow(-1).innerHTML = `<tr>
                                 <td>${participante.nombre}</td>
@@ -202,27 +226,36 @@
             desabilitarBoleto(numero);
         }
 
-        function desabilitarBoleto(numero){
+        function desabilitarBoleto(numero) {
             selector = document.getElementById('entrada-04');
             options = selector.childNodes;
             options.forEach(option => {
-                if(option.value == numero){
+                if (option.value == numero) {
                     option.disabled = "true";
                     option.style.background = 'lightgoldenrodyellow';
                 }
             });
         }
 
-        function Bolillero(){
-            this.numero = -1;
-            this.sortear = function(){
-                this.numero = parseInt(Math.random()*10)+1;
+        
+
+        function start() {
+            let bolillero = new Bolillero();
+            bolillero.sortear;
+            let numGanador = bolillero.numero;
+            obtenerGanador = listaParticipantes.filter(participante => participante.numeroBoleto == numGanador)
+
+            let sms = document.getElementById("ganador");
+            sms.innerHTML = `<h1>${numGanador}</h1>`;   
+            if (arr.length === 0) {
+                sms.innerHTML += `<h3>Nadie se lo lleva</h3>`;
+            } else{
+                sms.innerHTML += `<h3>${obtenerGanador[0]}</h3>`;
             }
+            
         }
 
-        function start(){
-            let ganador = new Bolillero().sortear;
-        }
+        
     </script>
 </body>
 
