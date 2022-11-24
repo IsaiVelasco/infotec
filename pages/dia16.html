@@ -26,6 +26,42 @@
                 atributos
                 del objeto) depositar, extraer.
             </p>
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="row_name_1">
+                        <th scope="row">1</th>
+                        <td></td>
+                        <td></td>
+                        <td id="idMonto"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form role="form">
+                <div class="form-group">
+                    <label class="control-label" for="entrada-01">Monto (MXN):</label>
+                    <input class="form-control" id="entrada-01" placeholder="Ingrese el monto de dinero" type="number">
+
+                </div>
+                <div class="form-group">
+                    <label for="entrada-02">Operacion:</label>
+                    <select id="entrada-02" class="form-control">
+                        <option selected>Seleccione...</option>
+                        <option>Depositar</option>
+                        <option>Retirar</option>
+                    </select>
+                </div>
+                <button type="button" onclick="transaccion()" class="btn btn-danger">Completar</button>
+                <button type="reset" class="btn btn-default" id="btn-cls">Limpiar</button>
+            </form>
             <hr>
 
             <h2>Problema 2</h2>
@@ -38,33 +74,69 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab-01">
-                    
+
                 </div>
                 <div class="tab-pane" id="tab-04">...</div>
             </div>
+            <hr>
+            <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
         </div>
+        <br>
     </main>
+
     <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     <script src="../js/script.js"></script>
     <script>
         /**
          * EJERCICIO 1
         */
-        function Cliente(nombre, saldo) {
+        function Cliente(id, nombre, apellidos, saldo) {
+            this.id = id;
             this.nombre = nombre;
+            this.apellidos = apellidos;
             this.saldo = saldo;
             this.depositar = depositar;
             this.extraer = extraer;
         }
         function depositar(dinero) {
-            this.saldo = saldo + dinero;
+            this.saldo += dinero;
         }
 
         function extraer(dinero) {
-            this.saldo = saldo - dinero;
+            if(this.saldo >= dinero){
+                this.saldo -= dinero;
+                return true;
+            }
+            return false;
         }
 
-        let cliente1 = new Cliente("Diego", 1200);
+        let cliente1 = new Cliente(1, "Isai", "Velasco", 0.00);
+
+        updateCliente();
+        function transaccion() {
+            let input1 = document.getElementById('entrada-01').value;
+            let input2 = document.getElementById('entrada-02').value;
+            dinero = parseInt(input1);
+            switch (input2) {
+                case 'Depositar':
+                    cliente1.depositar(dinero);
+                    break;
+                case 'Retirar':
+                    if(!cliente1.extraer(dinero)){
+                        alert('Fondos insuficientes')
+                    }
+                    break;
+            }
+            updateCliente();
+            document.getElementById('btn-cls').click();
+        }
+        
+        
+        function updateCliente() {
+            document.getElementById('row_name_1').childNodes[3].innerHTML = cliente1.nombre;
+            document.getElementById('row_name_1').childNodes[5].innerHTML = cliente1.apellidos;
+            document.getElementById('idMonto').innerHTML = `<strong>$${cliente1.saldo}</strong>`;
+        }
     </script>
 </body>
 
