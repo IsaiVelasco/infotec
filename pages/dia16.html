@@ -66,17 +66,54 @@
 
             <h2>Problema 2</h2>
             <p>
-
+                Desarrollaremos un programa que contenga dos clases. Una clase NumeroQuiniela que representa una persona que elige 
+                un número de quiniela y además registra su nombre, la clase tiene por objetivo la carga por el teclado del número deseado. 
+                La segunda clase Bolillero que sortee un valor aleatorio entre 1 y 10 (que representa el valor extraído del bolillero).
             </p>
+            <table class="table table-bordered table-responsive"  id="tb-part">
+                <caption>Participantes</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Número</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#tab-01">Elige tu boleto</a></li>
                 <li><a data-toggle="tab" href="#tab-04">Ir al sorteo</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab-01">
-
+                    <form role="form">
+                        <div class="form-group">
+                            <label class="control-label" for="entrada-03">Participante:</label>
+                            <input class="form-control" id="entrada-03" placeholder="Ingrese su nombre para participar" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="entrada-04">Número de boleto:</label>
+                            <select id="entrada-04" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="agregarParticipante()" class="btn btn-danger">Registrarse</button>
+                        <button type="reset" class="btn btn-default" id="btn-cls2">Limpiar</button>
+                    </form>
                 </div>
-                <div class="tab-pane" id="tab-04">...</div>
+                <div class="tab-pane" id="tab-04">
+                    
+                </div>
             </div>
             <hr>
             <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
@@ -87,7 +124,7 @@
     <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     <script src="../js/script.js"></script>
     <script>
-        /**
+        /*****************************************************************************
          * EJERCICIO 1
         */
         function Cliente(id, nombre, apellidos, saldo) {
@@ -111,8 +148,8 @@
         }
 
         let cliente1 = new Cliente(1, "Isai", "Velasco", 0.00);
-
         updateCliente();
+
         function transaccion() {
             let input1 = document.getElementById('entrada-01').value;
             let input2 = document.getElementById('entrada-02').value;
@@ -136,6 +173,55 @@
             document.getElementById('row_name_1').childNodes[3].innerHTML = cliente1.nombre;
             document.getElementById('row_name_1').childNodes[5].innerHTML = cliente1.apellidos;
             document.getElementById('idMonto').innerHTML = `<strong>$${cliente1.saldo}</strong>`;
+        }
+
+        /*****************************************************************************
+         * EJERCICIO 1
+        */
+        
+        function Participante(nombre, numeroBoleto){
+            this.nombre = nombre;
+            this.numeroBoleto = numeroBoleto;
+            this.gano = function(num){
+                if(this.numeroBoleto == num) 
+                    return true;
+                return false;
+            }
+        }
+        function agregarParticipante(){
+            let nombre = document.getElementById('entrada-03').value;
+            let numero = document.getElementById('entrada-04').value;
+
+            participante = new Participante(nombre,numero);
+            tabla = document.getElementById('tb-part');
+            tabla.insertRow(-1).innerHTML = `<tr>
+                                <td>${participante.nombre}</td>
+                                <td>${participante.numeroBoleto}</td>
+                             </tr>`;
+            document.getElementById('btn-cls2').click();
+            desabilitarBoleto(numero);
+        }
+
+        function desabilitarBoleto(numero){
+            selector = document.getElementById('entrada-04');
+            options = selector.childNodes;
+            options.forEach(option => {
+                if(option.value == numero){
+                    option.disabled = "true";
+                    option.style.background = 'lightgoldenrodyellow';
+                }
+            });
+        }
+
+        function Bolillero(){
+            this.numero = -1;
+            this.sortear = function(){
+                this.numero = parseInt(Math.random()*10)+1;
+            }
+        }
+
+        function start(){
+            let ganador = new Bolillero().sortear;
         }
     </script>
 </body>
