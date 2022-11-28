@@ -5,3 +5,10 @@ main{
 .izq{
     float: right;
 }
+
+#HoraActual{
+    font-size: 100px;
+}
+#fechaActual{
+    font-size: 40px;
+}

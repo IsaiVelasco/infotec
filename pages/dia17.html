@@ -17,42 +17,33 @@
     <br>
     <main class="page">
         <div class="container">
-            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia15.html" 
-                target="_blank" class="btn btn-link izq"> 
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia15.html" target="_blank"
+                class="btn btn-link izq">
                 <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
             <h2>Problema 1</h2>
-            <p> Imprimir Fecha y Hora</p>
-            <div>
-                <form role="form">
-                    <div class="form-group datepicker-group">
-                        <label class="control-label" for="calendarYear">Calendario:</label>
-                        <input class="form-control" id="calendarYear" type="text">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                      </div>
-                    <div class="form-group">
-                        <label class="control-label" for="lista-01">Lista de números:</label>
-                        <input class="form-control" id="lista-01" placeholder="Ingrese numeros separados por un espacio"
-                            type="text">
-
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="salida-01">Lista ordenada:</label>
-                        <input class="form-control" id="result1" disabled="true" id="salida-01" placeholder="Resultado"
-                            type="text">
-
-                    </div>
-                    <button type="button" onclick="orderData()" class="btn btn-danger">Ordenar</button>
-                    <button type="reset" class="btn btn-default">Limpiar</button>
-                </form>
-
-
+            <p> Mostrar en una página la fecha y la hora actual.</p>
+            <div >
+                <h1 id="HoraActual"> </h1>
+                <p id="fechaActual"></p>
             </div>
             <hr>
             <h2>Problema 2</h2>
             <p>
-                Mostrar los datos de una cadena, como longitud, y caracteres, subcadenas etc.
+                Tarea: Cargar un string por teclado y luego llamar a los distintos métodos de la clase String y la propiedad length.
             </p>
             <div>
+                <h3>Tu frase:</h3>
+                <h2>${cad}</h2>
+                <hr>
+                <fieldset style="border-color:blue;">
+                    <legend>Info. de la frase</legend>
+                    <p>Logitud: ${cLenght}</p>
+                    <p>Caracter aprox en medio: ${cCharAt}</p>
+                    <p>Subcadena: ${cSubstring}</p>
+                    <p>Contiene el saludo hola: ${isFind}</p>
+                    <p>Asi se ve en mayúscula: ${cToUpper}</p>
+                    <p>Así se ve en minúscula: ${cToLower}</p>
+                </fieldset>`
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label" for="entrada-02">Arreglo de números:</label>
@@ -74,31 +65,7 @@
 
             </div>
             <hr>
-            <h2>Problema 3</h2>
-            <p>
-                3)Definir una función de flecha que reciba un valor entero y retorne otro valor entero aleatorio
-                comprendido entre 1 y el valor que llega como parámetro. Asignar dicha función de flecha a una
-                constante para permitir llamarla en sucesivas ocasiones.
-            </p>
-            <div>
-                <form role="form">
-                    <div class="form-group">
-                        <label class="control-label" for="entrada-03">Limite:</label>
-                        <input class="form-control" id="entrada-03"
-                            placeholder="Ingrese el fin del rango para generar un numero aleatorio" type="number">
 
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="salida-03">Limite:</label>
-                        <input class="form-control" id="salida-03" placeholder="Numero aleatorio [0, limite]"
-                            type="number">
-
-                    </div>
-                    <button type="button" onclick="printAleatorio()" class="btn btn-danger">Generar</button>
-                    <button type="reset" class="btn btn-default">Limpiar</button>
-                </form>
-            </div>
-            <hr>
             <!-- Botón primario -->
             <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
 
@@ -110,13 +77,35 @@
 
     <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
-    
+
     <script src="../js/script.js"></script>
-        
+
     <script>
-        $gmx(document).ready(function() {
-  $('#calendarYear').datepicker({changeYear: true});
-});
+        showTime();
+        function showTime() {
+            myDate = new Date();
+            d = myDate.getDate();
+            m = myDate.getMonth();
+            y = myDate.getFullYear();
+
+            hours = myDate.getHours();
+            minutes = myDate.getMinutes();
+            seconds = myDate.getSeconds();
+            if (hours < 10) hours = 0 + hours;
+
+            if (minutes < 10) minutes = "0" + minutes;
+
+            if (seconds < 10) seconds = "0" + seconds;
+
+            document.getElementById("HoraActual").innerHTML = `<strong>${hours + ":" + minutes + ":" + seconds}</strong>`;
+            textDate = myDate.toLocaleDateString('es-ES', { weekday:"long", month:"long", day:"numeric"});
+            document.getElementById("fechaActual").innerHTML = textDate+`, ${y}`;
+            setTimeout("showTime()", 1000);
+        }
+        //Script para calendar .gob
+        $gmx(document).ready(function () {
+            $('#calendarYear').datepicker({ changeYear: true });
+        });
     </script>
 </body>
 
