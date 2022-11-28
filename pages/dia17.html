@@ -20,9 +20,14 @@
                 target="_blank" class="btn btn-link izq"> 
                 <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
             <h2>Problema 1</h2>
-            <p> 1) Ordenar un vector de enteros mediante el método sort, pasar una arrow function.</p>
+            <p> Imprimir Fecha y Hora</p>
             <div>
                 <form role="form">
+                    <div class="form-group datepicker-group">
+                        <label class="control-label" for="calendar">Calendario:</label>
+                        <input class="form-control" id="calendar" type="text">
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                      </div>
                     <div class="form-group">
                         <label class="control-label" for="lista-01">Lista de números:</label>
                         <input class="form-control" id="lista-01" placeholder="Ingrese numeros separados por un espacio"
@@ -44,8 +49,7 @@
             <hr>
             <h2>Problema 2</h2>
             <p>
-                2) Definir un vector con un conjunto de elementos. Generar un nuevo vector llamando al método filter
-                pasando una función de flecha para definir cuáles rescatar.
+                Mostrar los datos de una cadena, como longitud, y caracteres, subcadenas etc.
             </p>
             <div>
                 <form role="form">
@@ -107,99 +111,7 @@
     <script src="../js/script.js"></script>
 
     <script>
-        /**
-         *  PROBLEMA 1
-         * Obtiene el texto del input text y los convierte en un array de enteros
-         * Usa el metodo orderByShort para ordenarlos y mostrar el resultado 
-         */
-        function orderData() {
-            var input = document.getElementById("lista-01").value;
-
-            if (/[0-9]+ [0-9]+/.test(input)) {
-                var lista = [];
-                let arr = input.split(" ");
-
-                arr.forEach(element => {
-                    let z = parseInt(element);
-                    console.log(z)
-                    if (z + '' != 'NaN') lista.push(z);
-                });
-
-                const orderList = orderByShort(lista);
-
-                var s = '';
-                lista.forEach(i => { s += i + ", " })
-
-                document.getElementById('result1').value = s.substring(0, s.length - 2);
-
-            } else {
-                alert("Error, Deben ser numeros separados por un espacio.")
-            }
-
-        }
-
-        function orderByShort(lista) {
-            return lista.sort((x, y) => {
-                if (x > y) return 1;
-                else return -1;
-            })
-        }
-
-        /**
-         * PROBLEMA 2
-        */
-        function printPrimos() {
-            var input = document.getElementById("entrada-02").value;
-            if (/[0-9]+ [0-9]+/.test(input)) {
-                var lista = [];
-                let arr = input.split(" ");
-
-                arr.forEach(element => {
-                    let z = parseInt(element);
-                    console.log(z)
-                    if (z + '' != 'NaN') lista.push(z);
-                });
-
-                const primos = lista.filter(numero => isPrimeNumber(numero));
-
-                if(primos.length > 0)
-                    document.getElementById('salida-02').value = primos.toString();
-                else
-                    document.getElementById('salida-02').value = "No hay números primos en la lista";
-
-
-            } else {
-                alert("Error, Deben ser numeros separados por un espacio.")
-            }
-        }
-
-        const isPrimeNumber = (number) => {
-
-            if (number <= 1) {
-                return false;
-            }
-            let counter = 0;
-            for (let i = Math.trunc(Math.sqrt(number)); i > 1; i--) {
-                if(number % i == 0){
-                    counter ++;
-                }
-            }
-            return counter < 1;
-        }
-        /**
-         * PROBLEMA 3
-         * Obtiene el valor del input type number y genera un valor aleatorio con una funcion flecha.
-        */
-        const aleatorio = valor => Math.trunc(Math.random() * valor) + 1;
-        function printAleatorio() {
-            var input = document.getElementById("entrada-03").value;
-            var valor = parseInt(input);
-            if (valor != 'NaN') {
-                document.getElementById('salida-03').value = aleatorio(valor);
-            } else {
-                alert("Entrada incorrecta")
-            }
-        }
+        
 
     </script>
 </body>
