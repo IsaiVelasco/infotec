@@ -33,6 +33,4 @@ function addNav(){
 </nav>`;
 }
 addNav();
-$gmx(document).ready(function() {
-    $('#calendarYear').datepicker({changeYear: true});
-  });
+
