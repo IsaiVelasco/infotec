@@ -50,6 +50,11 @@
                         <input class="form-control" id="subcadena" placeholder="Resultado" type="text" disabled="true">
                         <div id="sub_length">Total de caracteres: <strong>0</strong></div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="spell">Caracter central</label>
+                        <input class="form-control" id="spell" placeholder="Deletreando..." type="text" disabled="true">
+                    </div>
                     
                     <button type="reset" class="btn btn-default" onclick="clean()">Limpiar</button>
                 </form>
@@ -107,20 +112,29 @@
         spanLength = document.getElementById("text_length");
         barra = document.getElementById("rango");
         alerta = document.getElementById("alerta");
+        spell = document.getElementById("spell");
 
         input.addEventListener('input', updateValue);
         barra.addEventListener('input',crearCadena);
         alerta.style.display = "none";  
 
         function updateValue(e) {
-            spanLength.innerHTML = `Total de caracteres: <strong>${input.value.length}</strong>`;
-            barra.max = input.value.length;
+            text = input.value;
+            spanLength.innerHTML = `Total de caracteres: <strong>${text.length}</strong>`;
+            barra.max = text.length;
             document.getElementById('subcadena').value = "";
-
-            if(input.value.toLowerCase().indexOf("hola")!= -1){
+            
+            if(text.toLowerCase().indexOf("hola")!= -1){
                 alerta.style.display = "";
             } else{
                 alerta.style.display = "none";
+            }
+
+            char = text.charAt(parseInt(text.length/2));
+            if(char == ' '){
+                spell.value = "espacio";
+            } else{
+                spell.value = char;
             }
         }
         function crearCadena(){
@@ -140,6 +154,7 @@
             document.getElementById('sub_length').innerHTML = cadena;
             barra.max = 1;
             alerta.style.display = "none";
+            spell.value = "";
         }
 
         //Script para calendar .gob
