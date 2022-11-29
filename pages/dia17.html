@@ -51,7 +51,6 @@
                         <div id="sub_length">Total de caracteres: <strong>0</strong></div>
                     </div>
                     
-                    <button type="button"  class="btn btn-danger">Filtrar</button>
                     <button type="reset" class="btn btn-default" onclick="clean()">Limpiar</button>
                 </form>
             </div>
@@ -116,6 +115,7 @@
         function updateValue(e) {
             spanLength.innerHTML = `Total de caracteres: <strong>${input.value.length}</strong>`;
             barra.max = input.value.length;
+            document.getElementById('subcadena').value = "";
 
             if(input.value.toLowerCase().indexOf("hola")!= -1){
                 alerta.style.display = "";
