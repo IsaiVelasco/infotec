@@ -17,48 +17,42 @@
     <br>
     <main class="page">
         <div class="container">
-            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia15.html" target="_blank"
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia17.html" target="_blank"
                 class="btn btn-link izq">
                 <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
             <h2>Problema 1</h2>
             <p> Mostrar en una página la fecha y la hora actual.</p>
-            <div >
+            <div class="mr">
                 <h1 id="HoraActual"> </h1>
                 <p id="fechaActual"></p>
             </div>
             <hr>
             <h2>Problema 2</h2>
             <p>
-                Tarea: Cargar un string por teclado y luego llamar a los distintos métodos de la clase String y la propiedad length.
+                Tarea: Cargar un string por teclado y luego llamar a los distintos métodos de la clase String y la
+                propiedad length.
             </p>
             <div>
-                <h3>Tu frase:</h3>
-                <h2>${cad}</h2>
-                <hr>
-                <fieldset style="border-color:blue;">
-                    <legend>Info. de la frase</legend>
-                    <p>Logitud: ${cLenght}</p>
-                    <p>Caracter aprox en medio: ${cCharAt}</p>
-                    <p>Subcadena: ${cSubstring}</p>
-                    <p>Contiene el saludo hola: ${isFind}</p>
-                    <p>Asi se ve en mayúscula: ${cToUpper}</p>
-                    <p>Así se ve en minúscula: ${cToLower}</p>
-                </fieldset>`
+                
                 <form role="form">
-                    <div class="form-group">
-                        <label class="control-label" for="entrada-02">Arreglo de números:</label>
-                        <input class="form-control" id="entrada-02"
-                            placeholder="Ingrese numeros separados por un espacio" type="text">
-
+                    <div class="alert alert-warning" id="alerta">
+                        <p >Se más original, saluda con otra palabra que no sea "HOLA"</p>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="salida-02">Primos:</label>
-                        <input class="form-control" id="salida-02" disabled="true" id="salida-01"
-                            placeholder="Numeros primos del arreglo" type="text">
-
+                        <label class="control-label" for="entrada-02">¿Qué estás pensando?</label>
+                        <input class="form-control" id="entrada-02" placeholder="Escribe algo" type="text">
+                        <div id="text_length">Total de caracteres: <strong>0</strong></div>
                     </div>
-                    <button type="button" onclick="printPrimos()" class="btn btn-danger">Filtrar</button>
-                    <button type="reset" class="btn btn-default">Limpiar</button>
+
+                    <label class="control-label" for="rango">Subcadena</label>
+                    <input id="rango" type="range" min="0" max="1">
+                    <div class="form-group">
+                        <input class="form-control" id="subcadena" placeholder="Resultado" type="text" disabled="true">
+                        <div id="sub_length">Total de caracteres: <strong>0</strong></div>
+                    </div>
+                    
+                    <button type="button"  class="btn btn-danger">Filtrar</button>
+                    <button type="reset" class="btn btn-default" onclick="clean()">Limpiar</button>
                 </form>
             </div>
             <div>
@@ -81,6 +75,9 @@
     <script src="../js/script.js"></script>
 
     <script>
+        /**
+         * EJERCICIO 1
+        */
         showTime();
         function showTime() {
             myDate = new Date();
@@ -98,10 +95,53 @@
             if (seconds < 10) seconds = "0" + seconds;
 
             document.getElementById("HoraActual").innerHTML = `<strong>${hours + ":" + minutes + ":" + seconds}</strong>`;
-            textDate = myDate.toLocaleDateString('es-ES', { weekday:"long", month:"long", day:"numeric"});
-            document.getElementById("fechaActual").innerHTML = textDate+`, ${y}`;
+            textDate = myDate.toLocaleDateString('es-ES', { weekday: "long", month: "long", day: "numeric" });
+            document.getElementById("fechaActual").innerHTML = textDate + `, ${y}`;
             setTimeout("showTime()", 1000);
         }
+
+        /**
+         * EJERCICIO 2
+        */
+
+        input = document.getElementById("entrada-02");
+        spanLength = document.getElementById("text_length");
+        barra = document.getElementById("rango");
+        alerta = document.getElementById("alerta");
+
+        input.addEventListener('input', updateValue);
+        barra.addEventListener('input',crearCadena);
+        alerta.style.display = "none";  
+
+        function updateValue(e) {
+            spanLength.innerHTML = `Total de caracteres: <strong>${input.value.length}</strong>`;
+            barra.max = input.value.length;
+
+            if(input.value.toLowerCase().indexOf("hola")!= -1){
+                alerta.style.display = "";
+            } else{
+                alerta.style.display = "none";
+            }
+        }
+        function crearCadena(){
+            
+            frase = input.value;
+            subcadena = frase.substring(0, barra.value);
+            subcadena = subcadena.toUpperCase();
+            document.getElementById('subcadena').value = subcadena;
+            document.getElementById('sub_length').innerHTML = `Total de caracteres: <strong>${subcadena.length}</strong>`;
+        }
+
+
+
+        function clean(){
+            cadena = `Total de caracteres: <strong>0</strong>`;
+            spanLength.innerHTML = cadena;
+            document.getElementById('sub_length').innerHTML = cadena;
+            barra.max = 1;
+            alerta.style.display = "none";
+        }
+
         //Script para calendar .gob
         $gmx(document).ready(function () {
             $('#calendarYear').datepicker({ changeYear: true });
