@@ -109,7 +109,7 @@
                 else return false;
             }
         }
-        document.getElementById("datos").innerHTML`<strong>${Jugador.nombre}</strong>`;
+        document.getElementById("datos").innerHTML = `<strong>${Jugador.nombre}</strong>`;
         function aumentar(){
             Jugador.puntuar(100);
             if(Jugador.ganador()){
