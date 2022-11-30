@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia 18</title>
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="idnav"></div>
+    <br>
+    <main class="page">
+        <div class="container">
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia17.html" target="_blank"
+                class="btn btn-link izq">
+                <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
+            <h2>Problema 1</h2>
+            <p> Crear un objeto que represente los datos de un participante de un juego.
+                Definir las propiedades: nombre, puntos y los métodos:imprimir (mostrar el nombre de jugador y los
+                puntos actuales), aumentarPuntos (permite incrementar la cantidad de puntos actuales del
+                jugador)verificarSiGano (mostrar un mensaje si los puntos superan a 1000).</p>
+            <div class="mr">
+                <h1 id="HoraActual"></h1>
+                <p id="fechaActual"></p>
+            </div>
+            <hr>
+            <h2>Problema 2</h2>
+            <p>
+                Plantear una clase llamada Menú que administre una lista de enlaces. Definir como atributos dos vectores
+                paralelos que almacenen en uno la 'url' y en el otro la 'descripción' de dicho enlace. Permitir insertar
+                enlaces y finalmente mediante un método que le pasamos el 'id' de un elemento HTML proceda a crearlo al
+                menú.
+            </p>
+            <div>
+
+                <form role="form">
+                    <div class="alert alert-warning" id="alerta">
+                        <p>Se más original, saluda con otra palabra que no sea "HOLA"</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="entrada-02">¿Qué estás pensando?</label>
+                        <input class="form-control" id="entrada-02" placeholder="Escribe algo" type="text">
+                        <div id="text_length">Total de caracteres: <strong>0</strong></div>
+                    </div>
+
+                    <label class="control-label" for="rango">Subcadena</label>
+                    <input id="rango" type="range" min="0" max="1">
+                    <div class="form-group">
+                        <input class="form-control" id="subcadena" placeholder="Resultado" type="text" disabled="true">
+                        <div id="sub_length">Total de caracteres: <strong>0</strong></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="spell">Caracter central</label>
+                        <input class="form-control" id="spell" placeholder="Deletreando..." type="text" disabled="true">
+                    </div>
+
+                    <button type="reset" class="btn btn-default" onclick="clean()">Limpiar</button>
+                </form>
+            </div>
+            <div>
+
+            </div>
+            <hr>
+
+            <!-- Botón primario -->
+            <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
+
+        </div>
+        <br>
+    </main>
+
+
+
+    <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+
+    <script src="../js/script.js"></script>
+
+    <script>
+        /**
+         * EJERCICIO 1
+        */
+        
+
+        /**
+         * EJERCICIO 2
+        */
+
+        
+
+        //Script para calendar .gob
+        $gmx(document).ready(function () {
+            $('#calendarYear').datepicker({ changeYear: true });
+        });
+    </script>
+</body>
+
+</html>
