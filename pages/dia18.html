@@ -25,9 +25,18 @@
                 Definir las propiedades: nombre, puntos y los métodos:imprimir (mostrar el nombre de jugador y los
                 puntos actuales), aumentarPuntos (permite incrementar la cantidad de puntos actuales del
                 jugador)verificarSiGano (mostrar un mensaje si los puntos superan a 1000).</p>
-            <div class="mr">
-                <h1 id="HoraActual"></h1>
-                <p id="fechaActual"></p>
+            <div>
+                <p id="datos"></p>
+                <form role="form row">
+                    
+                    <div class="form-group cil">
+                        <label class="control-label" for="puntos">Puntos</label>
+                        <input class="form-control" id="puntos" placeholder="0 puntos" type="text" disabled="true">
+                    </div>
+
+                    <h3 id="sms"></h3>
+                    <button type="reset" class="btn btn-primary" onclick="aumentar()">Clic muchas veces</button>
+                </form>
             </div>
             <hr>
             <h2>Problema 2</h2>
@@ -39,30 +48,26 @@
             </p>
             <div>
 
-                <form role="form">
-                    <div class="alert alert-warning" id="alerta">
-                        <p>Se más original, saluda con otra palabra que no sea "HOLA"</p>
+                <form role="form row">
+                    <p><strong>Agregar enlace</strong></p>
+                    <p>De clic en Start/Reset antes de agregar un enlace</p>
+                    <div class="form-group col">
+                        <label class="control-label" for="spell">Título</label>
+                        <input class="form-control" id="spell" placeholder="Título del enlace..." type="text" disabled="true">
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="entrada-02">¿Qué estás pensando?</label>
-                        <input class="form-control" id="entrada-02" placeholder="Escribe algo" type="text">
-                        <div id="text_length">Total de caracteres: <strong>0</strong></div>
-                    </div>
-
-                    <label class="control-label" for="rango">Subcadena</label>
-                    <input id="rango" type="range" min="0" max="1">
-                    <div class="form-group">
-                        <input class="form-control" id="subcadena" placeholder="Resultado" type="text" disabled="true">
-                        <div id="sub_length">Total de caracteres: <strong>0</strong></div>
+                    <div class="form-group cil">
+                        <label class="control-label" for="spell2">Link</label>
+                        <input class="form-control" id="spell2" placeholder="Ingrese la URL..." type="text" disabled="true">
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label" for="spell">Caracter central</label>
-                        <input class="form-control" id="spell" placeholder="Deletreando..." type="text" disabled="true">
-                    </div>
-
-                    <button type="reset" class="btn btn-default" onclick="clean()">Limpiar</button>
+                    <button type="reset" class="btn btn-danger" onclick="start()">Start/Reset Menu</button>
+                    <button type="reset" class="btn btn-primary" onclick="add()">Agregar</button>
                 </form>
+                <br>
+                <hr>
+                <div id="dinamic_menu">
+
+                </div>
             </div>
             <div>
 
@@ -87,50 +92,93 @@
         /**
          * EJERCICIO 1
         */
-        
-        var jugador = {
-            nombre:'Nombre',
+
+        var Jugador = {
+            nombre: 'Isai',
             puntos: 0,
-            imprimir: function(){
+            imprimir: function () {
 
             },
-            puntuar: function(punto){
-                this.puntos+=punto;
+            puntuar: function (punto) {
+                this.puntos += punto;
             },
-            ganador: function(){
-                if(this.puntos >= 1000){
+            ganador: function () {
+                if (this.puntos >= 1000) {
                     return true;
                 }
                 else return false;
             }
         }
+        document.getElementById("datos").innerHTML`<strong>${Jugador.nombre}</strong>`;
+        function aumentar(){
+            Jugador.puntuar(100);
+            if(Jugador.ganador()){
+                document.getElementById("sms").innerHTML = "YA GANASTE, DEJA EN PAZ ESE BOTON"
+            }
+            document.getElementById("puntos").value = Jugador.puntos;
+        }
+
+        
 
         /**
          * EJERCICIO 2
         */
-        class Item{
-            constructor(url, titulo){
+        class Item {
+            constructor( url, titulo) {
                 this.url = url;
                 this.titulo = titulo;
             }
         }
-        class Menu{
-            constructor(){
+        class Menu {
+            constructor(id,) {
+                this.id = id;
                 this.items = [];
             }
 
-            addLink(url, titulo){
-                let item = new Item(irl, titulo);
+            addLink(url, titulo) {
+                let item = new Item(url, titulo);
                 this.items.push(item);
             }
-            insertIn(element){
+            insertIn(element) {
+               
+                console.log("Hello world!");
                 let cadenaHtml = ``;
+                let x = 0;
                 this.items.forEach(item => {
-                    
+                    if(x == 0){
+                        cadenaHtml += `<li><a href="https://${item.url}" ><i class="icon-home" aria-hidden="true"> </i> ${item.titulo} </a></li>`
+                    } else{
+                        let cer = '';
+                        if(!item.url+"".includes("https://")){
+                            cer ='https://';
+                        } 
+                        cadenaHtml += `<li><a href="${cer}${item.url}" ><i class="glyphicon glyphicon-link" aria-hidden="true"> </i> ${item.titulo} </a></li>`
+                    }
+                    x++;
                 });
+                cadenaHtml = `<ul id="${this.id}" ${cadenaHtml} </ul>`;
+                element.innerHTML = cadenaHtml;
             }
         }
 
+        var titleIn = document.getElementById("spell");
+        var urlIn = document.getElementById('spell2');
+        var menu = new Menu(1);
+        function start() {
+            
+            menu.addLink('#','Inicio')
+            menu.insertIn(document.getElementById('dinamic_menu'))
+
+            titleIn.disabled = false;
+            urlIn.disabled = false;
+            
+        }
+
+        function add() {
+            menu.addLink(urlIn.value, titleIn.value);
+            menu.insertIn(document.getElementById('dinamic_menu'));
+        }
+        
         
     </script>
 </body>
