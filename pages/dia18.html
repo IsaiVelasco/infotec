@@ -17,7 +17,7 @@
     <br>
     <main class="page">
         <div class="container">
-            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia17.html" target="_blank"
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia18.html" target="_blank"
                 class="btn btn-link izq">
                 <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
             <h2>Problema 1</h2>
@@ -88,17 +88,50 @@
          * EJERCICIO 1
         */
         
+        var jugador = {
+            nombre:'Nombre',
+            puntos: 0,
+            imprimir: function(){
+
+            },
+            puntuar: function(punto){
+                this.puntos+=punto;
+            },
+            ganador: function(){
+                if(this.puntos >= 1000){
+                    return true;
+                }
+                else return false;
+            }
+        }
 
         /**
          * EJERCICIO 2
         */
+        class Item{
+            constructor(url, titulo){
+                this.url = url;
+                this.titulo = titulo;
+            }
+        }
+        class Menu{
+            constructor(){
+                this.items = [];
+            }
+
+            addLink(url, titulo){
+                let item = new Item(irl, titulo);
+                this.items.push(item);
+            }
+            insertIn(element){
+                let cadenaHtml = ``;
+                this.items.forEach(item => {
+                    
+                });
+            }
+        }
 
         
-
-        //Script para calendar .gob
-        $gmx(document).ready(function () {
-            $('#calendarYear').datepicker({ changeYear: true });
-        });
     </script>
 </body>
 
