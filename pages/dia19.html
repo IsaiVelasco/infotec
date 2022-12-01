@@ -28,17 +28,17 @@
                     responsabilidades de calcular el cuadrado del primer número y la raíz cuadrada.</li>
             </p>
             <div>
-                <p id="datos"></p>
+
                 <form role="form">
 
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label" for="num1">Numero 1</label>
-                            <input class="form-control" id="num1" placeholder="Ingresa un numero" type="text">
+                            <input class="form-control" id="num1" placeholder="Ingresa un numero" type="number">
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label" for="num2">Numero 2</label>
-                            <input class="form-control" id="num2" placeholder="Ingresa un numero" type="text">
+                            <input class="form-control" id="num2" placeholder="Ingresa un numero" type="number">
                         </div>
                     </div>
                     <div class="row">
@@ -69,28 +69,35 @@
             </p>
             <div>
 
-                <form role="form row">
-                    <p><strong>Agregar enlace</strong></p>
-                    <p>De clic en Start/Reset antes de agregar un enlace</p>
-                    <div class="form-group col">
-                        <label class="control-label" for="spell">Título</label>
-                        <input class="form-control" id="spell" placeholder="Título del enlace..." type="text"
-                            disabled="true">
+
+                <form role="form">
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="num11">Numero 1</label>
+                            <input class="form-control" id="num11" placeholder="Ingresa un numero" type="number">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="num22">Numero 2</label>
+                            <input class="form-control" id="num22" placeholder="Ingresa un numero" type="number">
+                        </div>
                     </div>
-                    <div class="form-group cil">
-                        <label class="control-label" for="spell2">Link</label>
-                        <input class="form-control" id="spell2" placeholder="Ingrese la URL..." type="text"
-                            disabled="true">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label" for="res">Resultados</label><br>
+                            <textarea name="" id="res" cols="100" rows="3" disabled="true"></textarea>
+
+                        </div>
                     </div>
 
-                    <button type="button" class="btn btn-danger" onclick="start()">Start/Reset Menu</button>
-                    <button type="reset" class="btn btn-primary" onclick="add()">Agregar</button>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="mayor()">Mayor</button>
+                        <button type="button" class="btn btn-primary" onclick="menor()">Menor</button>
+                        <button type="button" class="btn btn-primary" onclick="aleatorio()">Aleatorio</button>
+                        <button type="reset" class="btn btn-default" onclick="reset()">Reset</button>
+
+                    </div>
                 </form>
-                <br>
-                <hr>
-                <div id="dinamic_menu">
-
-                </div>
             </div>
             <div>
 
@@ -139,7 +146,7 @@
         }
 
         class CalculadoraCientifica extends Calculadora {
-            
+
             potencia() {
                 return Math.pow(this.x, this.y);
             }
@@ -157,15 +164,15 @@
             let x = parseFloat(num1.value);
             let y = parseFloat(num2.value);
             let calculadora = new Calculadora(x, y)
-            resultado = `Suma: ${calculadora.sumar()} \nResta: ${calculadora.restar()} \nMultiplicacion: ${calculadora.multiplicar()} \nDivision: ${calculadora.dividir()}\n`;
+            resultado = `Suma: ${calculadora.sumar()} \nResta: ${calculadora.restar()} \nMultiplicacion: ${calculadora.multiplicar()} \nDivision: ${calculadora.dividir()}`;
             document.getElementById('resultados').value = resultado;
-            return [resultado,x,y];
+            return [resultado, x, y];
         }
 
         function calCientifica() {
             let arr = calcular();
-            let cientifica = new CalculadoraCientifica(arr[1],arr[2])
-            let cadena = `Potencia (${arr[1]} ^ ${arr[2]}): ${cientifica.potencia()}\nCuadrado de ${arr[1]}: ${cientifica.cuadrado()}\nRaiz de ${arr[1]}: ${cientifica.raizCuadrada()}`
+            let cientifica = new CalculadoraCientifica(arr[1], arr[2])
+            let cadena = `Potencia (${arr[1]} ^ ${arr[2]}): ${cientifica.potencia()}\nCuadrado de ${arr[1]}: ${cientifica.cuadrado()}\nRaiz de ${arr[1]}: ${cientifica.raizCuadrada()}\n`
             document.getElementById('resultados').value = cadena + arr[0];
         }
         /**
@@ -174,16 +181,33 @@
 
         class Matematica {
             static mayor(x, y) {
-
+                let mayor = x;
+                if (y > x) mayor = y;
+                return mayor;
             }
             static menor(x, y) {
-
+                let menor = x;
+                if (y < x) menor = y;
+                return menor;
             }
             static aleatorio(start, end) {
-
+                return Math.trunc((Math.random() * (end + 1 - start)) + start);
             }
         }
-        
+        num11 = document.getElementById('num11');
+        num22 = document.getElementById('num22');
+        function mayor(){
+            valor = Matematica.mayor(parseInt(num11.value),parseInt(num22.value));
+            document.getElementById('res').value = valor;
+        }
+        function menor(){
+            valor = Matematica.menor(parseInt(num11.value),parseInt(num22.value));
+            document.getElementById('res').value = valor;
+        }
+        function aleatorio(){
+            valor = Matematica.aleatorio(parseInt(num11.value),parseInt(num22.value));
+            document.getElementById('res').value = valor;
+        }
 
     </script>
 </body>
