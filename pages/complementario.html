@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Complementaria</title>
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div id="idnav"></div>
+    <br>
+    <main class="page">
+        <div class="container">
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia15.html" target="_blank"
+                class="btn btn-link izq">
+                <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
+            <h2>Actividad Complementaria</h2>
+            <p> 1) Elabora el algoritmo utilizando la notación de diagrama de flujo del programa que cuente los días de
+                la semana, pide un día de la semana e indica si es laboral o no. Realiza el programa</p>
+            <div>
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label" for="calendar">Ingresa una fecha:</label>
+                        <input class="form-control" id="calendar" type="date">
+                    </div>
+                    <button id="continue" type="button" onclick="accion1()" class="btn btn-danger">Buscar</button>
+                    <button type="reset" class="btn btn-default" onclick="reset()">Limpiar</button>
+                </form>
+                <h1 id="laboral" style="color: #D0021B;"></h1>
+                <h2 id = "nolaboral" style="color: #4D92DF;"></h2>
+            </div>
+
+            <hr>
+            <!-- Botón primario -->
+            <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
+
+        </div>
+        <br>
+    </main>
+
+
+
+    <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+    <script src="../js/script.js"></script>
+
+    <script>
+
+        function accion1() {
+            //Obtenemos una cadena con la fecha que deseamos leer
+            const cadenaFecha = document.querySelector("#calendar").value;
+            
+            if (cadenaFecha === "") {
+                alert('fecha invalida');
+                return;
+            }
+            ms = Date.parse(cadenaFecha);
+            const myDate = new Date(ms);
+            
+            d = myDate.getDate();
+            myDate.setDate(d+1);
+            
+
+            if(myDate.toDateString().includes("Sat") | myDate.toDateString().includes("Sun")){
+                document.getElementById('laboral').innerHTML = ``;
+                document.getElementById('nolaboral').innerHTML = `Dia No Laboral`;
+            }
+            else{
+                document.getElementById('laboral').innerHTML = `Dia Laboral`;
+                document.getElementById('nolaboral').innerHTML = ``;
+            }
+        }
+
+        function reset(){
+            document.getElementById('nolaboral').innerHTML = ``;
+            document.getElementById('nolaboral').innerHTML = `Dia No Laboral`;
+            
+        }
+    </script>
+
+</body>
+
+</html>
