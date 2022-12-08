@@ -9,7 +9,6 @@
     <link href="/favicon.ico" rel="shortcut icon">
     <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -17,73 +16,83 @@
     <br>
     <main class="page">
         <div class="container">
-            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia20.html" target="_blank"
+            <a href="https://github.com/IsaiVelasco/infotec/blob/main/pages/dia16.html" target="_blank"
                 class="btn btn-link izq">
                 <span class="glyphicon glyphicon-sound-stereo" aria-hidden="true"></span> Ver código</a>
             <h2>Problema 1</h2>
             <p>
                 Crear un vector para almacenar los cinco sueldos de operarios y luego mostrar el total de gastos en sueldos (cada actividad en una función).
             </p>
-            <div>
+            <table class="table table-bordered table-responsive" id="tb-part">
+                <caption>operarios</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Operario</th>
+                        <th scope="col">Sueldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <h3 id="total"></h3>
+            <form role="form">
+                <div class="form-group">
+                    <label class="control-label" for="entrada-01">Nombre:</label>
+                    <input class="form-control" id="entrada-01" placeholder="Ingrese el nombre del operario" type="text">
 
-                <form role="form">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="entrada-02">Monto (MXN):</label>
+                    <input class="form-control" id="entrada-02" placeholder="Ingrese el monto de dinero" type="number">
 
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label" for="num1">Numero 1</label>
-                            <input class="form-control" id="num1" placeholder="Ingresa un numero" type="number">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label" for="num2">Numero 2</label>
-                            <input class="form-control" id="num2" placeholder="Ingresa un numero" type="number">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label" for="resultados">Resultados</label><br>
-                            <textarea name="" id="resultados" cols="100" rows="7" disabled="true"></textarea>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="calcular()">Calculadora
-                            Basica</button>
-                       
-
-                    </div>
-                </form>
-
-            </div>
+                </div>
+                <button type="button" onclick="agregarOperario()" class="btn btn-danger">Completar</button>
+                <button type="reset" class="btn btn-default" id="btn-cls">Limpiar</button>
+            </form>
             <hr>
             
-
-            <!-- Botón primario -->
+            
+            <hr>
             <a href="../index.html" class="btn btn-primary">Ir al inicio</a>
-
         </div>
         <br>
     </main>
 
-
-
     <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
-
     <script src="../js/script.js"></script>
-
     <script>
-        /**
+        /*****************************************************************************
          * EJERCICIO 1
-        */
-
+        */       
         
-        /**
-         * EJERCICIO 2
-        */
+        var listaOperarios = [];
+        var total = 0;
+        class Operario {
+            constructor(nombre, monto){
+                this.nombre = nombre;
+                this.monto = monto;
+            }
+        }
+        function agregarOperario() {
+            let nombre = document.getElementById('entrada-01').value;
+            let monto = parseFloat(document.getElementById('entrada-02').value);
+            operario = new Operario(nombre, monto)
+            listaOperarios.push(operario)
+            total+=monto;
 
+            actualizarTabla(operario);
+            document.getElementById('total').innerHTML=`Total: ${total}`;
+            document.getElementById('btn-cls').click();
+        }
+
+        function actualizarTabla(operario){
+            tabla = document.getElementById('tb-part');
+                tabla.insertRow(-1).innerHTML = `<tr>
+                                <td>${operario.nombre}</td>
+                                <td>${operario.monto}</td>
+                             </tr>`;
+        }
         
-
     </script>
 </body>
 
